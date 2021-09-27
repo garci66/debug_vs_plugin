@@ -49,8 +49,8 @@ class DebugVSPlugin( QObject ):
     self.iface = iface
     self.ptvsd = None
     try:
-      import ptvsd
-      self.ptvsd = ptvsd
+      import debugpy
+      self.ptvsd = debugpy
     except:
       pass
     self.port = 5678
@@ -126,7 +126,7 @@ class DebugVSPlugin( QObject ):
   def enable(self, checked):
     self.msgBar.popWidget()
     if self.ptvsd is None:
-      self.msgBar.pushCritical( self.pluginName, "Need install ptvsd: pip3 install ptvsd")
+      self.msgBar.pushCritical( self.pluginName, "Need install debugpy: pip3 install debugpy")
       return
     msgPort = f'"request": "attach", "Port": {self.port}, "host": "{self.host}"'
     if self.ptvsd.is_attached():
